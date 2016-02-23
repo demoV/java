@@ -1,8 +1,8 @@
 import java.util.Arrays;
 public class Matrix {
-	private int[][] matrix;
-	private int row;
-	private int column;
+	private final int[][] matrix;
+	private final int row;
+	private final int column;
 
 	public Matrix(int row, int column) {
 		this.matrix = new int[row][column];
@@ -49,7 +49,7 @@ public class Matrix {
 		return multipliedMatrix;
 	}
 
-	public Boolean isEqualTo(Matrix other) {
+	public boolean isEqualTo(Matrix other) {
 		return Arrays.deepEquals(this.matrix, other.matrix);
 	}
 
@@ -87,7 +87,7 @@ public class Matrix {
 		return determinant;
 	}
 
-	public Boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if(this == other) return true;
 		if(!(other instanceof Matrix)) return false;
 		Matrix another = (Matrix) other;
