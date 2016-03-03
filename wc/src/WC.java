@@ -48,18 +48,17 @@ public class WC {
 	// 		}	
 	// 	return counter;
 	// }
-	private String getAllCount(String content, String fileName) {
-		int[] allCounts = getAllResult(content);
-		String res = "";
-		for (int i = 0; i < allCounts.length ;i++ ) {
-			res += allCounts[i] + "\t";
-		}
-		return res + fileName;
-	}
+//	private String getAllCount(String content, String fileName) {
+//		int[] allCounts = getAllResult(content);
+//		String res = "";
+//		for (int i = 0; i < allCounts.length ;i++ ) {
+//			res += allCounts[i] + "\t";
+//		}
+//		return res + fileName;
+//	}
 
 	private int countOf(String option, String content) {
 		int[] allCounts = getAllResult(content);
-		System.out.println((option.charAt(1) == 'l') + "  " + option);
 		if(option.charAt(1) == 'l')
 			return allCounts[0];
 		if(option.charAt(1) == 'w')
@@ -73,13 +72,22 @@ public class WC {
 			askedCount[i] = countOf(options[i], content);
 		return askedCount;
 	}
-	public int[] getCounts(String[] options, String content) {
-		String[] defaultOptions = {"-l", "-w", "-c"};
+	public Counts getCounts(String[] options, String content, String fileName) {
 		int[] allCounts;
 		if(options.length == 0)
 			allCounts = getAllResult(content);
 		else
 			allCounts = countsOfGivenOptions(options, content);
-		return allCounts;			
+		return new Counts(fileName, allCounts);
 	}
+	public Counts total(Counts[] countsOfAllFile){
+		int numberOfCount = countsOfAllFile[0].count.length;
+		int total[] = new int[numberOfCount];
+		for(int i = 0; i < numberOfCount; i++) {
+			for (int j = 0; j < countsOfAllFile.length; j++)
+				total[i] += countsOfAllFile[j].count[i];
+		}
+		return new Counts("Total", total);
+	}
+
 }

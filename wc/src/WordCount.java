@@ -16,10 +16,6 @@ public class WordCount{
 		WordCount wordCount = new WordCount();
 		WCUtil util = new WCUtil();
 		String[] options = util.getOptions(args);
-		int[] res =  wc.getCounts(options, fileSys.readFile(args[args.length - 1]));
-		for (int i = 0; i < res.length ;i++ ) {
-			System.out.println(res[i]+ " "+options[0]);
-		}
-		// wordCount.print(res);
+		
 	}
 }

@@ -1,10 +1,6 @@
-import java.util.Arrays;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.Ignore;
 
 public class WCTest{
 	@Test
@@ -56,20 +52,27 @@ public class WCTest{
 		int[] expected = {1, 10, 46};
 		assertEquals(expected[0], wc.getAllResult(text)[0]);
 	}
-	// @Test
-	// public void WC_can_filter_allResult_of_the_String(){
-	// 	String text = "This is my first word count\r\nNow wc is working";
-	// 	WC wc = new WC();
-	// 	int[] expected = {1, 10, 46};
-	// 	assertEquals(expected[0], wc.getAllResult(text)[0]);
-	// }
-	// @Test
-	// public void WC_can_saperate_options_from_args(){
-	// 	WCUtil util = new WCUtil();
-	// 	String[] args = {"-l", "-w", "-w", "-c", "fileName"};
+	@Test
+	public void getCount_gives_counts_of_a_fileContent() {
+		String text = "This is my first word count\r\nNow wc is working";
+		WC wc = new WC();
+		int[] count = {1, 10, 46};
+		Counts expected = new Counts("fileName", count);
+		assertEquals(expected, wc.getCounts( new String[0], text, "fileName" ));
+	}
+	@Test
+	public void total_can_give_total_of_counts() {
+		WC wc = new WC();
+		int[] count1 = {1, 10, 46};
+		int[] count2 = {1, 10, 46};
+		Counts countObjOfFirstFile = new Counts("file1", count1);
+		Counts countObjOfSecondFile = new Counts("file2", count2);
 
-	// 	String[] expected = {"-l", "-w", "-c"};
-		
-	// 	assertTrue(Arrays.deepEquals(expected, util.getOptions(args)));
-	// }
+		Counts[] allCounts = {countObjOfFirstFile, countObjOfSecondFile};
+		int[] total =  {2, 20, 92};
+		Counts expected = new Counts("Total", total);
+
+		assertEquals(expected, wc.total(allCounts));
+	}
+	
 }
